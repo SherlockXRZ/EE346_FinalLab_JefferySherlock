@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+<include file = "$(find turtlebot3_gazebo)/launch/turtlebot3_empty_world.launch">
+<arg name = "world_file" value = "$(find line_follower_turtlebot)/Maps/lfm1.world"/>
+</include>
+
+<node pkg="line_follower_turtlebot" type="my_lf.py" name="line_follower" output="screen" cwd='node'>
+<remap from="/camera/rgb/image_raw" to="/camera/image" />
+<remap from="/cmd_vel_mux/input/teleop" to="/cmd_vel" />
+</node>
+</launch>

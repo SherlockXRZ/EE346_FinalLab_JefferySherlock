@@ -1,0 +1,29 @@
+<launch>
+<arg name = "StartRec" default = "false" />
+
+<include
+file = "$(find turtlebot3_gazebo)/launch/turtlebot3_empty_world.launch">
+  <arg name = "world_file" value ="$(find line_follower_turtlebot)/Maps/lfm1.world"/>
+</include>
+
+<!-- Detection node -->
+<node pkg="line_follower_turtlebot" name="detection" type="detect" cwd="node" output="screen">
+<remap from="/camera/rgb/image_raw" to="/camera/image" />
+</node>
+
+<!-- Robot commands node -->
+<node pkg="line_follower_turtlebot" name="Velocity" type="navig" cwd="node"
+output="screen">
+<remap from="/cmd_vel_mux/input/teleop" to="/cmd_vel" />
+</node>
+
+<node
+pkg = "rosbag"
+type = "record"
+name = "rosbag_record_all"
+respawn = "true"
+output = "screen"
+args = "-a -O BagFile -x /camera/(.*) "
+if = "$(arg StartRec)"
+/>
+</launch>

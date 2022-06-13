@@ -1,0 +1,15 @@
+<package>
+  <description brief="test">
+
+     test
+
+  </description>
+  <author>test</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/test</url>
+  <depend package="std_msgs"/>
+  <depend package="rospy"/>
+  <depend package="roscpp"/>
+
+</package>
